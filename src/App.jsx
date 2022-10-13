@@ -3,7 +3,9 @@
 // import reactLogo from './assets/react.svg'
 // import './App.css'
 // import './componentes/header/NavBar.jsx';
+import { createContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+
 import './App.css';
 import './componentes/header/NavBar.jsx';
 import { NavBar } from './componentes/header/NavBar.jsx';
@@ -12,30 +14,35 @@ import { NotFound404 } from './componentes/NotFound404/NotFound404';
 import CarritoPage from './componentes/pages/CarritoPage/CarritoPage';
 import { ItemDetailContainer } from './componentes/pages/ItemDetailContainer/ItemDetailContainer';
 import { ItemListContainer } from './componentes/pages/ItemListContainer/ItemListContainer';
+import CartContextProvider from './context/CartContext';
+//import { CartContext } from './context/CartContext';
 //import { ItemDetailContainer } from './componentes/pages/ItemDetailContainer/ItemDetailContainer';
 //import { ItemListContainer } from './componentes/pages/ItemListContainer/ItemListContainer';
 
 
-
+//const ContextApp=createContext()
 function App() {
 
   return (
-    <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route path ="/" element={<ItemListContainer/>}/>
-        <Route path ="/categoria/:idCategoria" element={<ItemListContainer/>}/>
-        <Route path ="/detalle/:idProducto" element={<ItemDetailContainer/>}/>
-        
-        <Route path ="/cart" element={<CarritoPage/>}/>
-        <Route path ="/404" element={<NotFound404/>}/>
+    <CartContextProvider>
+      <BrowserRouter>
+        <NavBar/>
+        <Routes>
+          <Route path ="/" element={<ItemListContainer/>}/>
+          <Route path ="/categoria/:idCategoria" element={<ItemListContainer/>}/>
+          <Route path ="/detalle/:idProducto" element={<ItemDetailContainer/>}/>
+          
+          <Route path ="/cart" element={<CarritoPage/>}/>
+          <Route path ="/404" element={<NotFound404/>}/>
 
-        <Route path="*" element={<Navigate to="/404"/>}/>
-        
-        
-      </Routes>
+          <Route path="*" element={<Navigate to="/404"/>}/>
+          
+          
+        </Routes>
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </CartContextProvider>
+    
   )
 
 }
