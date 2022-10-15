@@ -1,10 +1,13 @@
 //import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 export const CartWidget =()=>{
-	return <section>
+	return (<>
 		
 		
-		<button type="button" class="btn btn-link"><span class="bi bi-cart"></span></button>
+
+			<button type="button" class="btn btn-link"><span class="bi bi-cart"></span></button>
+		
         
-		</section>
-}
+		</>
+	)
+	}

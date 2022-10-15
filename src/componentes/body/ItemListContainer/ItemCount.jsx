@@ -1,41 +1,51 @@
 import {useState} from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../../context/CartContext"
-export const ItemCount =()=>{
+export const ItemCount =({stock, init, onAdd})=>{
+    //const [cantMax,setCantMaxima]=useState(producto.stock)
     //agrego 1 unidad del pruducto 
-    const { addItem  } = useCartContext()
-    const onAdd=(cantidad=1,producto)=>{
+    //const { addItem  } = useCartContext()
+    //const cantMaxima=(producto.stock)
+    
+    //console.log(cantMax)
+    // const onAdd=(cantidad=cont,producto)=>{
+    //    // console.log("2",producto)
+    //     cambioValor()
         
-        cambioValor()
         
-        
-        addItem( { ...producto, cantidad } )
+    //     addItem( { ...producto, cantidad } )
         
     
         
-    }
-
+    // }
+    //const cantidadMaxima=producto.stock
+    //console.log(cantidadMaxima)
+    const [cont, setCont]=useState(init)
     const handleClickMas = ()=>{
-        if (cont<=9){
+        //const cantMax=producto.stock
+        //console.log(producto)
+        if (cont<stock){
             setCont(cont +1)
         }
     }
     const handleClickMenos = ()=>{
         
-        if (cont>=2){
+        if (cont>init){
             setCont(cont -1)
         }
 
     }
-    const [cont, setCont]=useState(0)
-    const [option,setOption]= useState(1);
+    const handleonAdd=()=>{
+        onAdd(cont)
+    }
+    //const [option,setOption]= useState(1);
     //function cambioValor (){
-    const cambioValor=()=>{
-        //console.log("cambioValor")
-        //console.log("valor option",option)
-            option===1?
-            setOption(2):setOption(1)
-        }
+    // const cambioValor=()=>{
+    //     //console.log("cambioValor")
+    //     //console.log("valor option",option)
+    //         option===1?
+    //         setOption(2):setOption(1)
+    //     }
     //estilo para que esten alineados los botones
     
     const contenido={
@@ -44,41 +54,22 @@ export const ItemCount =()=>{
             alignItems: 'center',
             justifyContent:'center',
         }
-        // const { addItem  } = useCartContext()
-        // const onAdd=(cantidad=1)=>{
-        //     console.log("onAdd",cantidad)
-        //     addItem({...producto,cantidad})
-        // }
+
             
     return(
         <>
-        {option===1?
+       
         <div style={contenido}>
             <button className="btn btn-outline-primary btn-block" onClick={handleClickMenos}>-</button>
             <div>{cont}</div>
             <button className="btn btn-outline-primary btn-block" onClick={handleClickMas}>+</button>
             
-            <button className="btn btn-outline-primary btn-block" onClick={()=>onAdd()}>
+            <button className="btn btn-outline-primary btn-block" onClick={handleonAdd}>
             Agregar al carrito
             </button>  
               
         </div>
-        
-        
-            :
-            <div>
-                <Link to="/cart">
-                    <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
-                        Ver Carrito
-                    </button>
-                </Link>
-                <Link to="/">
-                    <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
-                        Seguir comprando
-                    </button>
-                </Link>
-            </div>    
-        }
+      
             
         </>
     )

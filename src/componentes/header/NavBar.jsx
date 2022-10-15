@@ -5,12 +5,12 @@ export const NavBar =()=>{
 	return <section>
 
 		
-		<nav class="navbar navbar-expand-lg bg-secondary">
+		<nav className="navbar navbar-expand-lg bg-secondary">
         <div class="container-fluid">
           <Link to="/">Brand Empresa</Link>
           
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
           
             
@@ -40,7 +40,9 @@ export const NavBar =()=>{
             </ul>
 
           </div>
-        <CartWidget/>  
+          <Link to="/cart">
+            <CartWidget/>  
+          </Link>
         </div>
       </nav>
 
