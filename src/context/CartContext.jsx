@@ -1,5 +1,5 @@
 //import { useEffect } from "react";
-import { useContext, useState, createContext } from "react";
+import { useContext, useState, createContext, useEffect } from "react";
 
 
 const CartContext = createContext([])

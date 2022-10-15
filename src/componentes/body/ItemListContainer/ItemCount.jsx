@@ -22,8 +22,7 @@ export const ItemCount =({stock, init, onAdd})=>{
     //console.log(cantidadMaxima)
     const [cont, setCont]=useState(init)
     const handleClickMas = ()=>{
-        //const cantMax=producto.stock
-        //console.log(producto)
+
         if (cont<stock){
             setCont(cont +1)
         }
@@ -37,15 +36,16 @@ export const ItemCount =({stock, init, onAdd})=>{
     }
     const handleonAdd=()=>{
         onAdd(cont)
+        cambioValor()
     }
-    //const [option,setOption]= useState(1);
+    const [option,setOption]= useState(1);
     //function cambioValor (){
-    // const cambioValor=()=>{
-    //     //console.log("cambioValor")
-    //     //console.log("valor option",option)
-    //         option===1?
-    //         setOption(2):setOption(1)
-    //     }
+    const cambioValor=()=>{
+        //console.log("cambioValor")
+        //console.log("valor option",option)
+            option===1?
+            setOption(2):setOption(1)
+        }
     //estilo para que esten alineados los botones
     
     const contenido={
@@ -58,19 +58,31 @@ export const ItemCount =({stock, init, onAdd})=>{
             
     return(
         <>
-       
-        <div style={contenido}>
-            <button className="btn btn-outline-primary btn-block" onClick={handleClickMenos}>-</button>
-            <div>{cont}</div>
-            <button className="btn btn-outline-primary btn-block" onClick={handleClickMas}>+</button>
-            
-            <button className="btn btn-outline-primary btn-block" onClick={handleonAdd}>
-            Agregar al carrito
-            </button>  
-              
-        </div>
-      
-            
+       {option===1?
+            <div style={contenido}>
+                <button className="btn btn-outline-primary btn-block" onClick={handleClickMenos}>-</button>
+                <div>{cont}</div>
+                <button className="btn btn-outline-primary btn-block" onClick={handleClickMas}>+</button>
+                
+                <button className="btn btn-outline-primary btn-block" onClick={handleonAdd}>
+                    Agregar al carrito
+                </button>  
+                
+            </div>
+            :
+            <div>
+                <Link to="/cart">
+                    <button className="btn btn-outline-primary btn-block">
+                        Ver Carrito
+                    </button>
+                </Link>
+                <Link to="/">
+                    <button className="btn btn-outline-primary btn-block">
+                        Seguir comprando
+                    </button>
+                </Link>
+            </div> 
+        }
         </>
     )
 }
@@ -90,18 +102,18 @@ export const ItemCount =({stock, init, onAdd})=>{
 //                                     </button>
 //                                 </div>
 //             :
-//             <div>
-//                 <Link to="/cart">
-//                     <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
-//                         Ver Carrito
-//                     </button>
-//                 </Link>
-//                 <Link to="/">
-//                     <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
-//                         Seguir comprando
-//                     </button>
-//                 </Link>
-//             </div>    
+            // <div>
+            //     <Link to="/cart">
+            //         <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
+            //             Ver Carrito
+            //         </button>
+            //     </Link>
+            //     <Link to="/">
+            //         <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
+            //             Seguir comprando
+            //         </button>
+            //     </Link>
+            // </div>    
 //         }
 //             </>
 //         )

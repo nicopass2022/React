@@ -1,5 +1,6 @@
 //import React from 'react'
 
+import { Link } from "react-router-dom"
 import { useCartContext } from "../../../context/CartContext"
 //import { itemProducto } from "../../body/ItemListContainer/item"
 
@@ -17,6 +18,11 @@ import { useCartContext } from "../../../context/CartContext"
           {cartList.map(producto => <li> nombre: {producto.name} categoría:{producto.categoria} precio: {producto.price} Cant: {producto.cantidad} </li> )}
         </ul>
         <button onClick={vaciarCarrito}>Vaciar carrito</button>
+        <Link to="/">
+                    <button className="btn btn-outline-primary btn-block">
+                        Seguir comprando
+                    </button>
+                </Link>
       </div>
     )
   }
