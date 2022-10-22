@@ -12,20 +12,14 @@ import { Input } from "../../body/input/input";
 
 
 export const ItemListContainer =()=>{
-    const handleClick = ()=>{
-        setCont(cont +1)
-        setFecha(Date())
-    }
-    //let fecha=Date()
-    const [cont, setCont]=useState(0)
-    const [fecha,setFecha]=useState(0)
+    console.log("renderizo ILC")
     const [loading,setLoading]=useState(true)
     const [productos,setProductos]=useState([])
     const {idCategoria}=useParams()
-    //console.log(idCategoria)
+    
     useEffect(()=>{
         if (idCategoria){
-            console.log(idCategoria)
+            
             gFetch()//simulacion de fetch >mock
             .then(resSgte=>setProductos(resSgte.filter(producto=>producto.categoria===idCategoria)))
             .catch(err=>console.log(err))
@@ -37,29 +31,35 @@ export const ItemListContainer =()=>{
         .finally(()=>setLoading(false))
         }
     },[idCategoria])
-    // useEffect(()=>{
-    //     gFetch()//simulacion de fetch >mock
-    //     .then(resSgte=>setProductos(resSgte))
-    //     .catch(err=>console.log(err))
-    //     .finally(()=>setLoading(false))
-    // },[])
 
+
+
+
+    
+  
 	return (
         <>
-
-            <h3>ItemListContainer</h3>
-            <Input/>
-            {loading ? <h3>Cargando...</h3>:
+            {/*<Input/>*/}
+            <br></br>
+            <div>
+                {Greeting("nombre usuario")}
+            </div>
+            <br></br>
+            {loading ? 
+                <div className="d-flex justify-content-center">
+                    <div className="spinner-border" role="status">
+                        {/*<span className="sr-only">Loading...</span>*/}
+                
+                    </div>
+                </div>
+            :
                 ItemList(productos) 
              }
             
-            <div>
-                <Greeting/>
-            </div>
-            <h3>Contador</h3>
+            {/*<h3>Contador</h3>
             <div>{cont}</div>
             <div>{fecha}</div>
-            <button onClick={handleClick}>Contador</button>
+            <button onClick={handleClick}>Contador</button>*/}
 
             
         </>
@@ -72,79 +72,8 @@ export const ItemListContainer =()=>{
 //     </section>
 // }
     function Greeting(props) {
-        return <p>Bienvenido Usuario</p>;
+        return <p>Bienvenido {props}</p>;
     }
 
     
 
-
-// const Contenido = () => {
-//     const handleClick = ()=>{
-//         setCont(cont +1)
-//         setFecha(Date())
-//     }
-//     //let fecha=Date()
-//     const [cont, setCont]=useState(0)
-//     const [fecha,setFecha]=useState(0)
-//     const [loading,setLoading]=useState(true)
-//     const [productos,setProductos]=useState([])
-//     useEffect(()=>{
-//         gFetch()//simulacion de fetch >mock
-//         .then(resSgte=>setProductos(resSgte))
-//         .catch(err=>console.log(err))
-//         .finally(()=>setLoading(false))
-//     },[])
-
-
-//     const contenido = {
-//           display: "block",
-//           border: "1px solid black",
-//           height: "340px",
-//           width: '100%',
-//           padding: "10px",
-//           opacity: 0.5,
-//           background: "grey"
-//     }
-//     return(
-//         <>
-//             <div style={contenido}>
-//                 <Greeting/>
-            
-//             </div>
-//             <div>{cont}</div>
-//             <div>{fecha}</div>
-//             <button onClick={handleClick}>Contador</button>
-//             <p>Itemcount a continuacion</p>
-//             <ItemCount/>
-//             {loading ? <h3>Cargando...</h3>:
-//                 productos.map(producto=>itemProducto(producto) )
-//             }
-
-
-//         </>
-//     )
-
-// };
-
-//MAP en el return**************************
-// productos.map(producto=>
-//     <div className="col-md-3" 
-//     key={producto.id}
-//     style={{marginLeft:100 }}>
-//         <div className="card w-100 mt-5">
-//             {`${producto.name}`}
-//         </div>
-//         <div className="card-body">
-//             <img src={producto.foto} alt="foto producto" className="w-50"/>
-//             {producto.price}                                                
-//         </div>
-
-//         <div className="card-footer">
-//             <button className="btn btn-outline-primary btn-block">
-//                 detalle del producto
-//             </button>
-                                                           
-//         </div>
-
-//     </div>
-// )

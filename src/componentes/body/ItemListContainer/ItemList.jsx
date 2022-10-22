@@ -2,29 +2,29 @@ import { itemProducto } from "./item";
 
 
 export const ItemList = (productos,loading) => {
+    console.log("renderizo IL")
     
-    //console.log(productos)
-    const contenido = {
-          display: "block",
-          border: "1px solid black",
-          height: "340px",
-          width: '100%',
-          padding: "10px",
-          opacity: 0.5,
-          background: "grey"
-    }
+
 
     return(
         
         <>
-            <h3>ItemList</h3>
-            {productos.map(producto=>itemProducto(producto) )}
+            <div
+            style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+            }}
+            >
 
+        
+            {/*<div className="bg-light">
+            <h3>ItemList</h3>*/}
+            {productos.map(producto=>itemProducto(producto) )}
+            </div>
 
 
         </>
     )
 
 };
-// {productos.map(producto=>itemProducto(producto) )
-// }

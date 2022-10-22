@@ -1,14 +1,13 @@
 import {useState} from "react"
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../../context/CartContext"
-export const ItemCount =({stock, init, onAdd, valor})=>{
-    console.log("renderizo item count")
+export const ItemCount =({stock, init, onAdd})=>{
     
     const [option,setOption]= useState(1);
     const [cont, setCont]=useState(init)
-    //let valorProducto=parseInt(valor)
     //const[cambioBoton, setCambioBoton]=useState(true)
     const handleClickMas = ()=>{
+
         if (cont<stock){
             setCont(cont +1)
         }
@@ -17,22 +16,21 @@ export const ItemCount =({stock, init, onAdd, valor})=>{
         
         if (cont>init){
             setCont(cont -1)
-
         }
 
     }
     const handleonAdd=()=>{
-        setOption(2)//:setOption(1)
         
         onAdd(cont)
         
         //setCambioBoton(false)
-            //option===1?
+            option===1?
+            setOption(2):setOption(1)
         //cambioValor()
     }
     //function cambioValor (){
     const cambioValor=()=>{
-        
+
         }
     //estilo para que esten alineados los botones
     
@@ -48,7 +46,6 @@ export const ItemCount =({stock, init, onAdd, valor})=>{
         <>
         {option===1?
        
-            <div>
             <div style={contenido}>
                 <button className="btn btn-outline-primary btn-block" onClick={handleClickMenos}>-</button>
                 <div className="col-md-2" >
@@ -60,9 +57,7 @@ export const ItemCount =({stock, init, onAdd, valor})=>{
                 <button className="btn btn-outline-primary btn-block" onClick={handleonAdd}>
                     Agregar al carrito
                 </button>  
-                </div>
-                <br></br>  
-                Total $:{valor*cont}
+                  
                 </div>
             :
             <div>
@@ -82,3 +77,35 @@ export const ItemCount =({stock, init, onAdd, valor})=>{
     )
 }
 
+// export default function Caso1(){
+//     const [option,setOption]= useState(1);
+//         function cambioValor (){
+//             option===1?
+//             setOption(2):setOption(1)
+//         }
+//         return(
+//             <>
+//             {option===1?
+//                                 <div>
+//                                 <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
+//                                         Opcion1
+//                                     </button>
+//                                 </div>
+//             :
+            // <div>
+            //     <Link to="/cart">
+            //         <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
+            //             Ver Carrito
+            //         </button>
+            //     </Link>
+            //     <Link to="/">
+            //         <button className="btn btn-outline-primary btn-block" onClick={cambioValor}>
+            //             Seguir comprando
+            //         </button>
+            //     </Link>
+            // </div>    
+//         }
+//             </>
+//         )
+
+// }

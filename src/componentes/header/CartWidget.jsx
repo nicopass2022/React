@@ -1,13 +1,24 @@
 //import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
-export const CartWidget =()=>{
-	return (<>
-		
-		
+import { useEffect } from "react";
+import { useCartContext } from "../../context/CartContext"
 
-			<button type="button" class="btn btn-link"><span class="bi bi-cart"></span></button>
-		
-        
+//import { useState } from "react"
+
+export const CartWidget =(cantidadArticulos)=>{
+	console.log("entre al cartwidget")
+	
+	const{cartList}=useCartContext()
+
+	
+	//cantidad=0
+	return(
+		<>
+			
+			<button type="button" className="btn btn-link"><span className="bi bi-cart">{cantidadArticulos}</span></button>
+
 		</>
 	)
-	}
+}
+	
+
