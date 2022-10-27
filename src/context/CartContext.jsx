@@ -12,7 +12,6 @@ const CartContextProvider=({children})=>{
     //defino el carrito
     const [cartList,setCartList]=useState ([])
     //defino un state para cantidades
-
     const[valorCarrito,setValorCarrito]=useState(0)
     const[cantidadArticulos,setCantidadArticulos]=useState(0)
     let valorProducto=0

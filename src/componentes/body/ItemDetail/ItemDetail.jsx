@@ -31,7 +31,7 @@ export const ItemDetail =(producto)=>{
                                 <img src={producto.foto} alt="foto producto" className="w-50"/>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div className="col-6">
                             Segunda de tres columnas
                             <h3>{producto.name}</h3>
                             
