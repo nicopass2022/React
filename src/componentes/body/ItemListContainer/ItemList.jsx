@@ -1,8 +1,11 @@
-import { itemProducto } from "./item";
+import { memo } from "react";
+import { ItemProducto } from "./item";
 
 
-export const ItemList = (productos,loading) => {
-    console.log("renderizo IL")
+
+export const ItemList =  memo(({productos}) => {
+    //console.log("renderizo IL")
+ 
     
 
 
@@ -18,13 +21,14 @@ export const ItemList = (productos,loading) => {
             >
 
         
-            {/*<div className="bg-light">
-            <h3>ItemList</h3>*/}
-            {productos.map(producto=>itemProducto(producto) )}
+
+                {productos.map( prod =>  <ItemProducto key={prod.id} prod={prod} />  )}
+                
             </div>
 
 
         </>
     )
 
-};
+}
+)

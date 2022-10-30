@@ -1,21 +1,21 @@
 import { ItemCount } from "../ItemListContainer/ItemCount"
 import { useCartContext } from "../../../context/CartContext"
-import { Link } from "react-router-dom"
-import {useState} from "react";
-import { CartWidget } from "../../header/CartWidget";
+//import { Link } from "react-router-dom"
+//import {useState} from "react";
+//import { CartWidget } from "../../header/CartWidget";
 
-export const ItemDetail =(producto)=>{
-    console.log("renderizo ID")
-    //const { addItem } = useCartContext()
+export const ItemDetail =({producto})=>{
+    //console.log("renderizo ID")
+    
     const { isInCart } = useCartContext()
-    //const[botonCarrito,setBotonCarrito]=useState(true)
+    
 
         const onAdd=(cantidad)=>{
-            //ItemCount
+           
             
-            CartWidget
+         
 
-           isInCart(producto,cantidad)
+           isInCart({...producto,cantidad})
 
             
         }

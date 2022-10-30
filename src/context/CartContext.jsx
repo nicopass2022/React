@@ -1,6 +1,4 @@
-import { useContext, useState, createContext, useEffect } from "react";
-//import { CartWidget } from "../componentes/header/CartWidget";
-//import { NavBar } from "../componentes/header/NavBar";
+import { useContext, useState, createContext } from "react";
 
 
 
@@ -13,72 +11,65 @@ const CartContextProvider=({children})=>{
     const [cartList,setCartList]=useState ([])
     //defino un state para cantidades
     const[valorCarrito,setValorCarrito]=useState(0)
-    const[cantidadArticulos,setCantidadArticulos]=useState(0)
+    
     let valorProducto=0
+    
+    const cantidadTotal  = cartList.reduce((acum, prod) => acum += prod.cantidad , 0)
     
 
     const eliminoArticulo=(producto)=>{
-        console.log("entro a eliminoArticulo")
+        
         
         setValorCarrito(valorCarrito-producto.total)
         const cartListModificada=(cartList.filter(productoexistente=>productoexistente.id!==producto.id))
         setCartList(cartListModificada)
-        setCantidadArticulos(cantidadArticulos-1)
+        
         
     }
 
 
-    //calculo el valor de todos los articulos del carrito
-    // const valorTotal=()=>{
-        
-    //     cartList.map(producto=>setValorCarrito(producto.cantidad * producto.price))
-        
-
-    //         }
             
-            const addItem=(producto,cantidad)=>{
+            const addItem=(producto)=>{
                 
                 //agrego el producto al cartList
                 
-                setCantidadArticulos(cantidadArticulos+1)
+            
                 setValorCarrito(valorCarrito+producto.cantidad*producto.price)
                 
                 valorProducto=producto.cantidad*producto.price
                 producto.total=valorProducto
                 setCartList([...cartList,producto])
+               
                 
                 
 
             }
             const vaciarCarrito=()=>{
                 setCartList([])
-                setCantidadArticulos(0)
+
                 setValorCarrito(0)
-                //setValorProducto(0)
-                //seteo el contador de cantidades y valores en 0
-                //setcantCarrito(0)
-                //setValorCarrito(0)
-                //setValorProducto(0)
+
         
             }
 
     //verifico que el producto exista
-    const isInCart=(producto,cantidad)=>{
-        
+    const isInCart=(producto)=>{
+       
+        //verifico si hay productos en el carlist
         if (cartList.length==0){
+            //si no hay, agredo
             
-            
-            addItem({ ...producto,cantidad } )
+            addItem({ ...producto} )
 
         }else{
             
+            //si hay, busco a ver si ya existe el producto
             try{
-                
                 //busco si existe en el carrito
                 const existe=(cartList.find(productoexistente=>productoexistente.id===producto.id))
-                existe ? console.log("existe el art") : console.log("no existe") 
+                
                 //si existe, sumo la cantidad que tenia + la nueva cantidad
-                const canTotal=parseInt(existe.cantidad+=cantidad)
+                const canTotal=parseInt(existe.cantidad+=producto.cantidad)
                 
                 //traigo el stock del articulo
                 const stock=parseInt(producto.stock)
@@ -89,7 +80,7 @@ const CartContextProvider=({children})=>{
                     
                     //alerto que excede el stock y la cantidad del producto es = al stock disponible
                     alert("solo puede adquirir"+stock+"productos")
-                    //let valorcompra= stock*producto.price
+                    
                     valorProducto=stock*existe.price
                     existe.total=valorProducto
                     
@@ -103,10 +94,9 @@ const CartContextProvider=({children})=>{
 
                 }
 
-
             }catch (error) {
-                console.log(error)
-                addItem({ ...producto,cantidad } )
+                
+                addItem({ ...producto } )
             }
 
         }
@@ -117,9 +107,9 @@ const CartContextProvider=({children})=>{
             addItem,
             vaciarCarrito,
             isInCart,
-            cantidadArticulos,
             valorCarrito,
-            eliminoArticulo
+            eliminoArticulo,
+            cantidadTotal
             
             
             

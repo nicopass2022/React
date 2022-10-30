@@ -1,13 +1,12 @@
 import {useState} from "react"
 import { Link } from "react-router-dom"
-import { useCartContext } from "../../../context/CartContext"
+//import { useCartContext } from "../../../context/CartContext"
 export const ItemCount =({stock, init, onAdd, valor})=>{
-    console.log("renderizo item count")
+    //console.log("renderizo item count")
     
     const [option,setOption]= useState(1);
     const [cont, setCont]=useState(init)
-    //let valorProducto=parseInt(valor)
-    //const[cambioBoton, setCambioBoton]=useState(true)
+
     const handleClickMas = ()=>{
         if (cont<stock){
             setCont(cont +1)
@@ -22,15 +21,13 @@ export const ItemCount =({stock, init, onAdd, valor})=>{
 
     }
     const handleonAdd=()=>{
-        setOption(2)//:setOption(1)
+        setOption(2)
         
         onAdd(cont)
         
-        //setCambioBoton(false)
-            //option===1?
-        //cambioValor()
+
     }
-    //function cambioValor (){
+    
     const cambioValor=()=>{
         
         }
