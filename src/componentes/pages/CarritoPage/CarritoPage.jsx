@@ -1,69 +1,108 @@
 
+import { useState } from 'react'
 import { Link } from "react-router-dom"
+
+import { addDoc, collection, doc, getFirestore, updateDoc } from 'firebase/firestore'
+
 import { useCartContext } from "../../../context/CartContext"
-import { ItemCarrito } from "../../body/CarritoPage/ItemCarrito"
-import { addDoc, collection, getFirestore, query } from 'firebase/firestore'
-import { useEffect, useState } from 'react'
+import { ItemCart } from "../../body/CarritoPage/ItemCarrito"
 
 
-export default function CarritoPage(){
+export default function CartPage(){
     
     
     const [loading,setLoading]=useState(false)
-    const { cartList, vaciarCarrito, valorCarrito, cantidadTotal} = useCartContext()
+    const { cartList, emptyCart, valueCart, cantTotal} = useCartContext()
     const  [dataForm, setDataForm] = useState({
       name:"",
       phone:"",
+      email:"",
+      emailcheck:"",
     })
    
-    
-  const[confirmacion,setConfirmacion]=useState("0")
-  const[validaCorreo,setValidaCorreo]=useState(true)
+   
+  const[confirm,setConfirm]=useState("0")
+  const[validateMail,setValidateMail]=useState(true)
   //*****FECHA */
   let id=1
-  const tiempoTranscurrido = Date.now()
-  const hoy = new Date(tiempoTranscurrido)
-  hoy.toDateString()
+  const time = Date.now()
+  const today = new Date(time)
+  today.toDateString()
   //***fin fecha */
-  
+  //***Funcion para actualizar el stock  */
+    const prodToUpdate=()=>{
+      
+      const listProducts=cartList.map(prod=>{
+        
+        const stockU=prod.stock-prod.cant
+        const {id}=prod
+        return{id,stockU}
+      })
+        
+        const db = getFirestore()
+        
+       
+        try{
+        listProducts.forEach(element => {
 
-  const generarOrden = async (e)=>{
+          const orderDoc=doc(db,"productos",element.id)
+          updateDoc(orderDoc,{stock:element.stockU})
+        });
+      }catch(err){
+        console.log(err)
+      }
+        
+
+      
+    }
+    //***fin actualizar stock */
+  const genOrder = async (e)=>{
     
       e.preventDefault()
-      const Orden = {}
+      prodToUpdate()
+      
+      const Order = {}
       //VALIDO EL CORREO
-      setLoading(true)
       
       if (dataForm.email===dataForm.emailcheck){
-        setValidaCorreo(true)
+        setValidateMail(true)
         
       }else{
-        console.log("correo NO validado")
+       
+        setValidateMail(false)
+        return;
         
       }
-        Orden.buyer= {
+      setLoading(true)
+        Order.buyer= {
               name: dataForm.name,
               phone: dataForm.phone,
               email: dataForm.email
 
           }
-          Orden.productos=cartList.map(prod=>{
+          Order.products=cartList.map(prod=>{
               const {id,name:title, price}=prod
               return{id,title,price}
+
         })
+       
+
+    
+
         const db = getFirestore()
-        const ordenes= collection(db,"ordenes")
+        const orders= collection(db,"ordenes")
+        
 
         try{
           
-            const docRef = await  addDoc(ordenes,Orden);
+            const docRef = await  addDoc(orders,Order);
             
             id=docRef.id
             setLoading(false)
     
-            setConfirmacion(id)
+            setConfirm(id)
     
-            vaciarCarrito()
+            emptyCart()
     
     
             }catch(err){
@@ -89,10 +128,10 @@ export default function CarritoPage(){
 
     return (
       <>
-        {cantidadTotal?
+        {cantTotal?
         <div>
                   
-                <i className="bi bi-cart"></i>
+                
                 
                   <div className="row"></div>
                   
@@ -103,24 +142,25 @@ export default function CarritoPage(){
                       
                       <div className="  border-3 bg-white   mb-5 bg-white rounded" >
                         
-                        {cartList.map(producto =>  <ItemCarrito key={producto.id} producto={producto} />  )}
+                        {cartList.map(product =>  <ItemCart key={product.id} product={product} />  )}
                       </div>
                   </div>
                   <div className="col bg-light shadow">
-                    
-                      <h3>Total de Articulos {cantidadTotal}</h3>
-                      
-                      <h3></h3>
-                    
-                    
-                      <h3>Total Compra $ {valorCarrito}</h3>
+
+                      <h2>Resumen de la compra</h2>
+                      <br></br>
+                      <h3>Total de Articulos {cantTotal}</h3>
+                      <br></br>
+
+                      <h3>Total Compra $ {valueCart}</h3>
+                      <br></br>
                       por favor, complete el formulario para finalizar la compra
                       <br></br>
-                      {validaCorreo?<h3></h3>:<h3>Verifique el campo correo</h3>}
+                      {validateMail?<h3></h3>:<h3>Verifique el campo correo</h3>}
                       <br></br>
 
 
-            <form onSubmit={generarOrden}>
+            <form onSubmit={genOrder}>
                   <input 
                       type="text" 
                       name="name"
@@ -163,7 +203,7 @@ export default function CarritoPage(){
               <hr></hr>
 
 
-                      <button className="btn btn-outline-primary btn-block" onClick={vaciarCarrito}>Vaciar carrito</button>
+                      <button className="btn btn-outline-primary btn-block" onClick={emptyCart}>Vaciar carrito</button>
                       <Link to="/">
                         <button className="btn btn-outline-primary btn-block">
                           Seguir comprando
@@ -193,12 +233,12 @@ export default function CarritoPage(){
 
 
                   
-                  {confirmacion==0 ?
+                  {confirm==0 ?
                     <h3></h3>
                     :
                     <div>
                       <br></br>
-                      <h3>Felicitaciones {dataForm.name}, tu codigo de confirmacion es {confirmacion}</h3>
+                      <h3>Felicitaciones {dataForm.name}, tu codigo de confirmacion es {confirm}</h3>
                       <h1>Gracias por su compra</h1>
                     </div>
                   }
@@ -209,11 +249,11 @@ export default function CarritoPage(){
         <div>
           
           
-          {confirmacion==0 ?
+          {confirm==0 ?
             
                     <div>
                       <br></br>
-                      <h1>Tu Carrito esta vacio</h1>
+                      <h1>Tu carrito esta vacio :(</h1>
                       <br></br>
                       <Link to="/">
                         <button className="btn btn-outline-primary btn-block">
@@ -226,7 +266,7 @@ export default function CarritoPage(){
                     
                  
                     <div>
-                    <h3>Felicitaciones {dataForm.name} , tu codigo de confirmacion es {confirmacion}</h3>
+                    <h3>Felicitaciones {dataForm.name} , tu codigo de confirmacion es {confirm}</h3>
                       <h3>Gracias por tu compra</h3>
                       <Link to="/">
                         <button className="btn btn-outline-primary btn-block">

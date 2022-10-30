@@ -10,93 +10,93 @@ const CartContextProvider=({children})=>{
     //defino el carrito
     const [cartList,setCartList]=useState ([])
     //defino un state para cantidades
-    const[valorCarrito,setValorCarrito]=useState(0)
+    const[valueCart,setValueCart]=useState(0)
     
-    let valorProducto=0
+    let valueProduct=0
     
-    const cantidadTotal  = cartList.reduce((acum, prod) => acum += prod.cantidad , 0)
+    const cantTotal  = cartList.reduce((acum, prod) => acum += prod.cant , 0)
     
-
-    const eliminoArticulo=(producto)=>{
+    
+    const delItem=(product)=>{
         
         
-        setValorCarrito(valorCarrito-producto.total)
-        const cartListModificada=(cartList.filter(productoexistente=>productoexistente.id!==producto.id))
-        setCartList(cartListModificada)
+        setValueCart(valueCart-product.total)
+        const cartListModif=(cartList.filter(productexist=>productexist.id!==product.id))
+        setCartList(cartListModif)
         
         
     }
 
 
             
-            const addItem=(producto)=>{
+            const addItem=(product)=>{
                 
                 //agrego el producto al cartList
                 
             
-                setValorCarrito(valorCarrito+producto.cantidad*producto.price)
+                setValueCart(valueCart+product.cant*product.price)
                 
-                valorProducto=producto.cantidad*producto.price
-                producto.total=valorProducto
-                setCartList([...cartList,producto])
+                valueProduct=product.cant*product.price
+                product.total=valueProduct
+                setCartList([...cartList,product])
                
                 
                 
 
             }
-            const vaciarCarrito=()=>{
+            const emptyCart=()=>{
                 setCartList([])
 
-                setValorCarrito(0)
+                setValueCart(0)
 
         
             }
 
     //verifico que el producto exista
-    const isInCart=(producto)=>{
+    const isInCart=(product)=>{
        
         //verifico si hay productos en el carlist
         if (cartList.length==0){
             //si no hay, agredo
             
-            addItem({ ...producto} )
+            addItem({ ...product} )
 
         }else{
             
             //si hay, busco a ver si ya existe el producto
             try{
                 //busco si existe en el carrito
-                const existe=(cartList.find(productoexistente=>productoexistente.id===producto.id))
+                const exist=(cartList.find(productexist=>productexist.id===product.id))
                 
                 //si existe, sumo la cantidad que tenia + la nueva cantidad
-                const canTotal=parseInt(existe.cantidad+=producto.cantidad)
+                const canTotal=parseInt(exist.cant+=product.cant)
                 
                 //traigo el stock del articulo
-                const stock=parseInt(producto.stock)
+                const stock=parseInt(product.stock)
                 //verifico si la cantidad es mayor al stock disponible
                 if (canTotal>stock){
 
-                    existe.cantidad=stock
+                    exist.cant=stock
                     
                     //alerto que excede el stock y la cantidad del producto es = al stock disponible
                     alert("solo puede adquirir"+stock+"productos")
                     
-                    valorProducto=stock*existe.price
-                    existe.total=valorProducto
+                    valueProduct=stock*exist.price
+                    exist.total=valueProduct
                     
                 }else{
                     //seteo la cantidad del producto en cantidad total
-                    existe.cantidad=canTotal
-                    valorProducto=canTotal*existe.price
-                    setValorCarrito(valorCarrito+existe.cantidad*existe.price)
-                    existe.total=valorProducto
+                    exist.cant=canTotal
+                    valueProduct=canTotal*exist.price
+                    setValueCart(valueCart+exist.cant*exist.price)
+                    exist.total=valueProduct
                     
 
                 }
 
             }catch (error) {
                 
-                addItem({ ...producto } )
+                addItem({ ...product } )
             }
 
         }
@@ -105,11 +105,11 @@ const CartContextProvider=({children})=>{
         <CartContext.Provider value= {{
             cartList,
             addItem,
-            vaciarCarrito,
+            emptyCart,
             isInCart,
-            valorCarrito,
-            eliminoArticulo,
-            cantidadTotal
+            valueCart,
+            delItem,
+            cantTotal
             
             
             

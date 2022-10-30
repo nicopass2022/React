@@ -1,8 +1,9 @@
 import {useState} from "react"
 import { Link } from "react-router-dom"
-//import { useCartContext } from "../../../context/CartContext"
+
+
 export const ItemCount =({stock, init, onAdd, valor})=>{
-    //console.log("renderizo item count")
+   
     
     const [option,setOption]= useState(1);
     const [cont, setCont]=useState(init)

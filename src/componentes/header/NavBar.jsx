@@ -27,25 +27,20 @@ export const NavBar =()=>{
             
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/categoria/gorra" className="nav-link active text-white">Gorras</Link>
+                <Link to="/contact" className="nav-link active text-white">Contacto</Link>
                  
               </li>
-              <li className="nav-item">
-                <Link to="/categoria/remera" className="nav-link active text-white">Remeras</Link>
-                
-              </li>
-              <li className="nav-item">
-                <Link to="/" className="nav-link active text-white" aria-current="page">Home</Link>
-                
-              </li>
+
+            
+
               <li className="nav-item dropdown">
                 <a className="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Categorias
                 </a>
                 <ul className="dropdown-menu">
-                  <li><Link to="/categoria/aridos" className="dropdown-item">Aridos</Link></li>
-                  <li><Link to="/categoria/ladrillos" className="dropdown-item">Ladrillos</Link></li>
-                  <li><Link to="/categoria/tejas" className="dropdown-item">Tejas</Link></li>
+                  <li><Link to="/category/aridos" className="dropdown-item">Aridos</Link></li>
+                  <li><Link to="/category/ladrillos" className="dropdown-item">Ladrillos</Link></li>
+                  <li><Link to="/category/tejas" className="dropdown-item">Tejas</Link></li>
                 </ul>
               </li>
 

@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import{doc, getDoc, getFirestore} from "firebase/firestore"
 
 import { ItemDetail } from "../../body/ItemDetail/ItemDetail";
-import{doc, getDoc, getFirestore} from "firebase/firestore"
 
 
 export const ItemDetailContainer =()=>{
-    //console.log("renderizo IDC")
-    const [productos,setProductos]=useState([])
+    
+    const [products,setProducts]=useState([])
     const [loading,setLoading]=useState(true)
-    const{idProducto}=useParams()
+    const{idProduct}=useParams()
     
 
 
     useEffect(()=>{
         const db=getFirestore()
-        const queryDoc=doc(db,"productos",idProducto)
+        const queryDoc=doc(db,"productos",idProduct)
         getDoc(queryDoc)
-        .then(resp=>setProductos({id:resp.id, ...resp.data()}))
+        .then(resp=>setProducts({id:resp.id, ...resp.data()}))
         .catch(err=>console.log(err))
         .finally(()=>setLoading(false))
     },[])
@@ -34,7 +34,7 @@ export const ItemDetailContainer =()=>{
             </div>
         :
         
-        <ItemDetail producto={productos} /> 
+        <ItemDetail product={products} /> 
         
     }
        

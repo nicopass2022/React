@@ -1,12 +1,12 @@
-//import { Link } from "react-router-dom";
+
 import { useCartContext } from "../../../context/CartContext";
-//import { ItemDetailContainer } from "../../pages/ItemDetailContainer/ItemDetailContainer";
-//import {DetailListContainer} from "../../pages/ItemDetailContainer/ItemListContainer/ListDetailContainer"
-export const ItemCarrito=({producto})=>{
-    const{eliminoArticulo}=useCartContext()
-    const eliminar=()=>{
+
+
+export const ItemCart=({product})=>{
+    const{delItem}=useCartContext()
+    const delArtic=()=>{
         
-        eliminoArticulo(producto)
+        delItem(product)
     }
 
     return(
@@ -15,30 +15,30 @@ export const ItemCarrito=({producto})=>{
         
             <div className="row">
                 <div className="col-sm-9 w-100 border">
-                    {`${producto.name}`}
+                    {`${product.name}`}
                
                 </div>
                 <div className="row w-100 ">
                     
                  <div className="col-6 ">
                         
-                        <img src={producto.foto} alt="foto producto" className="w-50"/>
+                        <img src={product.foto} alt="foto producto" className="w-50"/>
                     </div>
                     <div className="col-auto ">
                         <div>
                             
-                           Cantidad: {producto.cantidad}
+                           Cantidad: {product.cant}
                             
                             
                         </div>
-                        Unitario ${producto.price} 
+                        Unitario ${product.price} 
                         <br></br>   
-                        Total ${producto.total}                                          
+                        Total ${product.total}                                          
                         <hr></hr>
                         
                     </div>
                     <div className="col-auto">
-                        <button className="btn btn-outline-primary btn-block" onClick={eliminar}>Eliminar</button>
+                        <button className="btn btn-outline-primary btn-block" onClick={delArtic}>Eliminar</button>
                     </div>
                 </div>
                

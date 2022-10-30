@@ -1,3 +1,6 @@
+Link para vel rl carrito
+https://comprasonlinemateriales.netlify.app/
+
 Carro de compras.
   destinado a la venta de Materiales para la construccion, donde encontramos diferentes categorrias de articulos, como ser, Aridos, Ladrillos, Tejas. 
   En la aplicacion el ususario podra navegar entre as diferentes categorias desde su NaVBar, podra ver los detalles de cada producto, indicar las cantidades necesarias   del mismo que se iran agregando al carro de compras. Finalemten podra confirmar la orden de compras, previamente completando un formulario con datos como, Nombre,      telefono y correo electronico.

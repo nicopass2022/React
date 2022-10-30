@@ -1,21 +1,19 @@
-import { ItemCount } from "../ItemListContainer/ItemCount"
 import { useCartContext } from "../../../context/CartContext"
-//import { Link } from "react-router-dom"
-//import {useState} from "react";
-//import { CartWidget } from "../../header/CartWidget";
+import { ItemCount } from "../ItemListContainer/ItemCount"
 
-export const ItemDetail =({producto})=>{
-    //console.log("renderizo ID")
+
+export const ItemDetail =({product})=>{
+    
     
     const { isInCart } = useCartContext()
     
 
-        const onAdd=(cantidad)=>{
+        const onAdd=(cant)=>{
            
             
          
 
-           isInCart({...producto,cantidad})
+           isInCart({...product,cant})
 
             
         }
@@ -26,34 +24,34 @@ export const ItemDetail =({producto})=>{
                 <div className="container">
                      <div className="row shadow">
                         <div className="col">
-                            Primera de tres columnas
+                            
                             <div className="  border-3 bg-white   mb-5 bg-white rounded" >
-                                <img src={producto.foto} alt="foto producto" className="w-50"/>
+                                <img src={product.foto} alt="foto producto" className="w-50"/>
                             </div>
                         </div>
                         <div className="col-6">
-                            Segunda de tres columnas
-                            <h3>{producto.name}</h3>
                             
-                            <h3>categoria: {producto.categoria}</h3>
+                            <h3>{product.name}</h3>
+                            
+                            <h3>categoria: {product.categoria}</h3>
                             
                             Descripcion
                             <hr></hr>
                             <div className=" text-wrap text-break">
-                                {producto.descripcion}
+                                {product.descripcion}
                             </div>
                             <hr></hr>
                         </div>
                         <div className="col w-33">
-                            Tercera de tres columnas
+                            
                             <br></br>
-                            stock disponible: {producto.stock}
+                            stock disponible: {product.stock}
                             <br></br>
-                            precio: $ {producto.price}
+                            precio: $ {product.price}
                             <br></br>
                             <div className="col w-33">
                             
-                                <ItemCount onAdd={onAdd} stock={producto.stock} init={1} valor={producto.price}/>
+                                <ItemCount onAdd={onAdd} stock={product.stock} init={1} valor={product.price}/>
                               
                             </div>
                         </div>

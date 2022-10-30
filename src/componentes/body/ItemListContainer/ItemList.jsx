@@ -1,9 +1,9 @@
 import { memo } from "react";
-import { ItemProducto } from "./item";
+import { ItemProduct } from "./item";
 
 
 
-export const ItemList =  memo(({productos}) => {
+export const ItemList =  memo(({products}) => {
     //console.log("renderizo IL")
  
     
@@ -22,7 +22,7 @@ export const ItemList =  memo(({productos}) => {
 
         
 
-                {productos.map( prod =>  <ItemProducto key={prod.id} prod={prod} />  )}
+                {products.map( prod =>  <ItemProduct key={prod.id} prod={prod} />  )}
                 
             </div>
 
