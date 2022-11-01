@@ -18,7 +18,7 @@ export const ItemListContainer =()=>{
    
    
 
-    //***se fect para traer articulos de la base. en queryflter valido si traigo idcategory y filtro la consulta */
+    //***useefect para traer articulos de la base. en queryflter valido si traigo idcategory y filtro la consulta */
     useEffect(()=>{
         
             const db=getFirestore()
@@ -33,30 +33,6 @@ export const ItemListContainer =()=>{
         
     },[idCategory])
 
-//****Orifinal  */
-// useEffect(()=>{
-//     if (idCategory){
-//         const db=getFirestore()
-//         const queryCollection=collection(db,"productos")
-//         const queryFilter=query(queryCollection,where("categoria","==",idCategory))
-//         getDocs(queryFilter)
-//         .then(resp=>setProductos(resp.docs.map(prod=>({id:prod.id, ...prod.data()}))))
-//         .catch(err=>console.log(err))
-//         .finally(()=>setLoading(false))
-
-//     }else{
-//         const db=getFirestore()
-//         const queryCollection=collection(db,"productos")
-//         getDocs(queryCollection)
-//         .then(resp=>setProductos(resp.docs.map(prod=>({id:prod.id, ...prod.data()}))))
-//         .catch(err=>console.log(err))
-//         .finally(()=>setLoading(false))
-//     }
-// },[idCategory])
-//****Fin original */
-      
-
-    
   
 	return (
         <>

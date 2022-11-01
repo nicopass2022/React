@@ -4,8 +4,6 @@ import { ItemProduct } from "./item";
 
 
 export const ItemList =  memo(({products}) => {
-    //console.log("renderizo IL")
- 
     
 
 
@@ -26,7 +24,7 @@ export const ItemList =  memo(({products}) => {
                 
             </div>
 
-
+                
         </>
     )
 
